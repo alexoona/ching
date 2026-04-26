@@ -1,0 +1,44 @@
+
+use Institute
+
+db.createCollection("Students")
+
+db.Students.insertMany([
+{ RollNo: 1, StudentName: "Amit", Age: 16, Branch: "IT", Address: { City: "Pune", State: "MH" }, Hobbies: ["Reading","Cricket"] },
+{ RollNo: 2, StudentName: "Neha", Age: 14, Branch: "CS", Address: { City: "Mumbai", State: "MH" }, Hobbies: ["Dance"] },
+{ RollNo: 3, StudentName: "Akash", Age: 17, Branch: "ENTC", Address: { City: "Pune", State: "MH" }, Hobbies: ["Music"] },
+{ RollNo: 4, StudentName: "Riya", Age: 15, Branch: "IT", Address: { City: "Nashik", State: "MH" }, Hobbies: ["Drawing"] },
+{ RollNo: 5, StudentName: "Anjali", Age: 18, Branch: "CS", Address: { City: "Pune", State: "MH" }, Hobbies: ["Reading"] },
+{ RollNo: 6, StudentName: "Sagar", Age: 19, Branch: "MECH", Address: { City: "Nagpur", State: "MH" }, Hobbies: ["Sports"] },
+{ RollNo: 7, StudentName: "Arjun", Age: 16, Branch: "IT", Address: { City: "Pune", State: "MH" }, Hobbies: ["Gaming"] },
+{ RollNo: 8, StudentName: "Kiran", Age: 13, Branch: "CIVIL", Address: { City: "Satara", State: "MH" }, Hobbies: ["Art"] },
+{ RollNo: 9, StudentName: "Asha", Age: 17, Branch: "CS", Address: { City: "Mumbai", State: "MH" }, Hobbies: ["Dance"] },
+{ RollNo: 10, StudentName: "Rohit", Age: 20, Branch: "IT", Address: { City: "Pune", State: "MH" }, Hobbies: ["Cricket"] }
+]);
+
+db.Students.find()
+
+db.Students.find({ Age: { $gt: 15 } })
+
+db.Students.find().sort({ StudentName: 1 })
+
+db.Students.updateOne(
+  { RollNo: 3 },
+  { $set: { Branch: "Computer" } }
+)
+
+db.Students.deleteOne({ RollNo: 1 })
+
+db.Students.find({ StudentName: /^A/ })
+
+db.Students.countDocuments()
+
+db.Students.find().limit(5)
+
+db.Students.find().skip(3)
+
+db.Students.find({ "Address.City": "Pune" })
+
+db.Students.find({}, { StudentName: 1, _id: 0 })
+
+db.Students.drop()
