@@ -1,0 +1,17 @@
+db.movies.find(
+  { budget: { $gt: 100000 } },
+  { name: 1, _id: 0 }
+)
+
+db.movies.find(
+  { "producer.address": "PUNE" },
+  { "producer.name": 1, _id: 0 }
+)
+db.movies.updateMany(
+  { type: "action" },
+  { $set: { type: "horror" } }
+)
+db.movies.find(
+  { "producer.name": "producer1" },
+  { name: 1, "producer.address": 1, _id: 0 }
+)

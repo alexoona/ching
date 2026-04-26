@@ -1,0 +1,21 @@
+UPDATE Company
+SET city = 'Pune'
+WHERE cname = 'ABC';
+
+UPDATE works
+SET sal = CASE
+    WHEN sal <= 20000 THEN sal * 1.10
+    ELSE sal * 1.03
+END
+WHERE cname = 'Mbank';
+
+SELECT e.ename
+FROM Emp e
+JOIN works w ON e.emp_id = w.emp_id
+JOIN Company c ON w.c_id = c.c_id
+WHERE w.cname = 'Bosch'
+AND c.city = 'Pune';
+
+DELETE FROM works
+WHERE cname = 'SBC'
+AND sal > 50000;
