@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple DOM Example</title>
+</head>
+<body>
+
+    <h2>DOM Example</h2>
+
+    <p id="demo">Click button to change text</p>
+
+    <button onclick="changeText()">Change Text</button>
+    <button onclick="addPara()">Add Paragraph</button>
+
+    <script>
+        function changeText() {
+            document.getElementById("demo").innerHTML = "Hello! Text Changed";
+        }
+
+        function addPara() {
+            var p = document.createElement("p");   // create element
+            p.innerHTML = "New paragraph added";   // add text
+            document.body.appendChild(p);          // add to page
+        }
+    </script>
+
+</body>
+</html>

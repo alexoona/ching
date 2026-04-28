@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form using POST</title>
+</head>
+<body>
+
+    <h2>Student Form</h2>
+
+    <!-- Form -->
+    <form method="POST" action="">
+        Name: <input type="text" name="name"><br><br>
+        Email: <input type="text" name="email"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <?php
+        // Check if form is submitted
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            // Get form data
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+
+            // Display data
+            echo "<h3>Entered Details:</h3>";
+            echo "Name: " . $name . "<br>";
+            echo "Email: " . $email;
+        }
+    ?>
+
+</body>
+</html>

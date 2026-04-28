@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page with Image, Link & Nested Table</title>
+</head>
+<body>
+
+    <h1 align="center">My Web Page</h1>
+
+
+    <h2>My Favorite Image</h2>
+    <img src="https://via.placeholder.com/200" alt="Sample Image" width="200">
+
+
+    <h2>Visit Website</h2>
+    <p>
+        Click here to visit 
+        <a href="https://www.google.com" target="_blank">Google</a>
+    </p>
+
+
+    <h2>Student Data</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>abc</td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <th>Age</th>
+                        <th>Course</th>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Computer Engineering</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Form</title>
+</head>
+<body>
+
+    <h2 align="center">Student Registration Form</h2>
+
+    <form>
+
+
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <br><br>
+
+
+        <label>Date of Birth:</label><br>
+        <input type="date" name="dob"><br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+</body>
+</html>

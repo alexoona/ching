@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Example</title>
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: auto;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <h1 style="color: red;">Student Table</h1>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+        <tr>
+            <td>Vedant</td>
+            <td>Computer Engineering</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+
+
+
+td {
+    text-align: center;
+    padding: 10px;
+    color: green;
+}
