@@ -1,85 +1,93 @@
 CREATE TABLE Customer (
     C_Id INT PRIMARY KEY,
-    Cname VARCHAR(20),
-    City VARCHAR(20)
+    Cname VARCHAR(30),
+    City VARCHAR(30)
 );
-INSERT INTO Customer VALUES
-(1, 'John', 'Nashik'),
-(2, 'Seema', 'Aurangabad'),
-(3, 'Amita', 'Nagar'),
-(4, 'Rakesh', 'Pune'),
-(5, 'Samata', 'Nashik'),
-(6, 'Ankita', 'Chandwad'),
-(7, 'Bhavika', 'Pune'),
-(8, 'Deepa', 'Mumbai'),
-(9, 'Nitin', 'Nagpur'),
-(10, 'Pooja', 'Pune');
+
 CREATE TABLE Account (
     C_Id INT,
     Acc_Type VARCHAR(20),
-    Amount INT,
-    FOREIGN KEY (C_Id) REFERENCES Customer(C_Id)
+    Amount INT
 );
+
+INSERT INTO Customer VALUES
+(1,'John','Nashik'),
+(2,'Seema','Aurangabad'),
+(3,'Amita','Nagar'),
+(4,'Rakesh','Pune'),
+(5,'Samata','Nashik'),
+(6,'Ankita','Chandwad'),
+(7,'Bhavika','Pune'),
+(8,'Deepa','Mumbai'),
+(9,'Nitin','Nagpur'),
+(10,'Pooja','Pune');
+
 INSERT INTO Account VALUES
-(1, 'Current', 5000),
-(2, 'Saving', 20000),
-(3, 'Saving', 7000),
-(4, 'Saving', 50000),
-(6, 'Current', 35000),
-(7, 'Loan', 3000),
-(8, 'Saving', 5000),
-(9, 'Saving', 90000),
-(10, 'Loan', 800),
-(11, 'Current', 45000);
+(1,'Current',5000),
+(2,'Saving',20000),
+(3,'Saving',70000),
+(4,'Saving',50000),
+(6,'Current',35000),
+(7,'Loan',3000),
+(8,'Saving',50000),
+(9,'Saving',90000),
+(10,'Loan',8000),
+(11,'Current',45000);
 
-SELECT c.Cname, a.Acc_Type, a.Amount
-FROM Customer c
-JOIN Account a ON c.C_Id = a.C_Id
-WHERE a.Acc_Type = 'Saving';
+SELECT C.Cname, A.Acc_Type, A.Amount
+FROM Customer C
+JOIN Account A
+ON C.C_Id = A.C_Id
+WHERE A.Acc_Type = 'Saving';
 
-SELECT * 
-FROM Customer 
+SELECT *
+FROM Customer
 NATURAL JOIN Account;
-SELECT * 
-FROM Customer c
-LEFT JOIN Account a ON c.C_Id = a.C_Id;
-SELECT * 
-FROM Customer c
-RIGHT JOIN Account a ON c.C_Id = a.C_Id;
+
+SELECT *
+FROM Customer
+LEFT JOIN Account
+ON Customer.C_Id = Account.C_Id;
+
+SELECT *
+FROM Customer
+RIGHT JOIN Account
+ON Customer.C_Id = Account.C_Id;
 
 SELECT *
 FROM Customer
 WHERE City = (
-    SELECT City 
-    FROM Customer 
+    SELECT City
+    FROM Customer
     WHERE Cname = 'Pooja'
 );
 
 SELECT *
 FROM Account
 WHERE Amount < (
-    SELECT AVG(Amount) FROM Account
+    SELECT AVG(Amount)
+    FROM Account
 );
 
 SELECT C_Id
 FROM Account
 WHERE Amount = (
-    SELECT MAX(Amount) FROM Account
+    SELECT MAX(Amount)
+    FROM Account
 );
 
 SELECT Acc_Type, Amount
-FROM Account a
+FROM Account A1
 WHERE Amount = (
-    SELECT MIN(Amount)
-    FROM Account
-    WHERE Acc_Type = a.Acc_Type
+    SELECT MIN(A2.Amount)
+    FROM Account A2
+    WHERE A1.Acc_Type = A2.Acc_Type
 );
 
-
-SELECT *
+SELECT Amount
 FROM Account
 WHERE Amount > ANY (
-    SELECT Amount 
-    FROM Account 
+    SELECT Amount
+    FROM Account
     WHERE Acc_Type = 'Saving'
 );
