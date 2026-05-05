@@ -67,3 +67,4 @@ END LOOP;
 COMMIT;
 END;
 /
+SELECT * FROM Result;
