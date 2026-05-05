@@ -1,0 +1,62 @@
+CREATE TABLE N_RollCall (
+    RollNo NUMBER PRIMARY KEY,
+    Name VARCHAR2(50)
+);
+
+CREATE TABLE O_RollCall (
+    RollNo NUMBER PRIMARY KEY,
+    Name VARCHAR2(50)
+);
+
+
+
+INSERT INTO N_RollCall VALUES (1, 'Amit');
+INSERT INTO N_RollCall VALUES (2, 'Sneha');
+INSERT INTO N_RollCall VALUES (3, 'Ravi');
+INSERT INTO N_RollCall VALUES (4, 'Pooja');
+
+INSERT INTO O_RollCall VALUES (2, 'Sneha'); 
+INSERT INTO O_RollCall VALUES (5, 'Kiran');
+
+
+
+
+DECLARE
+    CURSOR c_new_roll(p_roll NUMBER) IS
+        SELECT RollNo, Name
+        FROM N_RollCall
+        WHERE RollNo = p_roll;
+
+    v_roll  N_RollCall.RollNo%TYPE;
+    v_name  N_RollCall.Name%TYPE;
+    v_count NUMBER;
+
+BEGIN
+    FOR r IN (SELECT RollNo FROM N_RollCall) LOOP
+
+
+        OPEN c_new_roll(r.RollNo);
+        FETCH c_new_roll INTO v_roll, v_name;
+        CLOSE c_new_roll;
+
+
+        SELECT COUNT(*) INTO v_count
+        FROM O_RollCall
+        WHERE RollNo = v_roll;
+
+        IF v_count = 0 THEN
+            INSERT INTO O_RollCall(RollNo, Name)
+            VALUES (v_roll, v_name);
+        END IF;
+
+    END LOOP;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Data merged successfully');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+/

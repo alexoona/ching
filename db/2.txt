@@ -1,0 +1,61 @@
+CREATE TABLE Borrower (
+    Rollin NUMBER,
+    Name VARCHAR2(50),
+    DateofIssue DATE,
+    NameofBook VARCHAR2(50),
+    Status CHAR(1)
+);
+
+
+CREATE TABLE Fine (
+    Roll_no NUMBER,
+    Date_of_return DATE,
+    Amt NUMBER
+);
+
+
+INSERT INTO Borrower VALUES (1, 'Amit', SYSDATE - 10, 'DBMS', 'I');
+INSERT INTO Borrower VALUES (2, 'Sneha', SYSDATE - 20, 'OS', 'I');
+INSERT INTO Borrower VALUES (3, 'Ravi', SYSDATE - 35, 'CN', 'I');  
+INSERT INTO Borrower VALUES (4, 'Pooja', SYSDATE - 5, 'Java', 'I'); 
+
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    rno NUMBER := &roll_no;
+    book VARCHAR2(20) := '&book';
+    issue_date DATE;
+    days NUMBER;
+    fine NUMBER := 0;
+
+BEGIN
+    SELECT DateofIssue INTO issue_date
+    FROM Borrower
+    WHERE Rollin = rno AND NameofBook = book;
+
+    days := TRUNC(SYSDATE - issue_date);
+
+    IF days > 30 THEN
+        fine := days * 50;
+    ELSIF days >= 15 THEN
+        fine := days * 5;
+    END IF;
+
+    UPDATE Borrower SET Status='R'
+    WHERE Rollin = rno AND NameofBook = book;
+
+    IF fine > 0 THEN
+        INSERT INTO Fine VALUES(rno, SYSDATE, fine);
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('Days = ' || days);
+    DBMS_OUTPUT.PUT_LINE('Fine = ' || fine);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Record not found');
+END;
+
+
+ 

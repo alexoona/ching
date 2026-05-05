@@ -1,0 +1,69 @@
+CREATE TABLE student (
+    S_ID INT PRIMARY KEY,
+    name VARCHAR(100),
+    dept_name VARCHAR(50),
+    tot_cred INT
+);
+
+CREATE TABLE instructor (
+    T_ID INT PRIMARY KEY,
+    name VARCHAR(100),
+    dept_name VARCHAR(50),
+    salary DECIMAL(10,2)
+);
+
+CREATE TABLE course (
+    course_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    dept_name VARCHAR(50),
+    credits INT
+);
+
+
+
+INSERT INTO student VALUES
+(1, 'Amit', 'Computer', 120),
+(2, 'Amol', 'IT', 110),
+(3, 'Ramesh', 'Computer', 100),
+(4, 'Samar', 'Mechanical', 90),
+(5, 'Kamlesh', 'Computer', 95);
+
+
+INSERT INTO instructor VALUES
+(101, 'Amol', 'Computer', 50000),
+(102, 'Amit', 'IT', 45000),
+(103, 'Suresh', 'Computer', 48000),
+(104, 'Rajesh', 'Mechanical', 40000),
+(105, 'Kiran', 'Computer', 55000);
+
+
+INSERT INTO course VALUES
+(201, 'DBMS', 'Computer', 4),
+(202, 'Operating System', 'Computer', 3),
+(203, 'Computer Networks', 'IT', 3),
+(204, 'Thermodynamics', 'Mechanical', 4),
+(205, 'Data Structures', 'Computer', 4);
+
+
+SELECT dept_name, AVG(salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING AVG(salary) > 42000;
+
+UPDATE instructor
+SET salary = salary * 1.10
+WHERE dept_name = 'Computer';
+
+SELECT name
+FROM instructor
+WHERE name NOT IN ('Amol', 'Amit');
+
+SELECT name
+FROM student
+WHERE name LIKE '%am%';
+
+SELECT s.name
+FROM student s
+JOIN course c ON s.dept_name = c.dept_name
+WHERE s.dept_name = 'Computer'
+AND c.title = 'DBMS';

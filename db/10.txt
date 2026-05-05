@@ -1,0 +1,61 @@
+CREATE TABLE Library (
+    book_id NUMBER PRIMARY KEY,
+    book_name VARCHAR2(50),
+    author VARCHAR2(50),
+    price NUMBER
+);
+
+CREATE TABLE Library_Audit (
+    book_id NUMBER,
+    book_name VARCHAR2(50),
+    author VARCHAR2(50),
+    price NUMBER,
+    action_type VARCHAR2(10), 
+    action_time DATE
+);
+
+INSERT INTO Library VALUES (1, 'DBMS', 'Korth', 500);
+INSERT INTO Library VALUES (2, 'OS', 'Galvin', 600);
+INSERT INTO Library VALUES (3, 'CN', 'Tanenbaum', 550);
+INSERT INTO Library VALUES (4, 'Java', 'Herbert Schildt', 650);
+
+CREATE OR REPLACE TRIGGER trg_library_audit
+BEFORE UPDATE OR DELETE ON Library
+FOR EACH ROW
+BEGIN
+    IF UPDATING THEN
+        INSERT INTO Library_Audit
+        VALUES (
+            :OLD.Book_id,
+            :OLD.Book_Name,
+            :OLD.Author,
+            :OLD.Price,
+            'UPDATE',
+            SYSDATE
+        );
+
+    ELSIF DELETING THEN
+        INSERT INTO Library_Audit
+        VALUES (
+            :OLD.Book_id,
+            :OLD.Book_Name,
+            :OLD.Author,
+            :OLD.Price,
+            'DELETE',
+            SYSDATE
+        );
+    END IF;
+END;
+/
+
+
+UPDATE Library
+SET price = 700
+WHERE book_id = 1;
+
+
+DELETE FROM Library
+WHERE book_id = 2;
+
+
+SELECT * FROM Library_Audit;

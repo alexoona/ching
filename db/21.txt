@@ -1,0 +1,76 @@
+CREATE TABLE Emp (
+    e_no INT PRIMARY KEY,
+    e_name VARCHAR(50),
+    post VARCHAR(50),
+    pay_rate INT
+);
+
+CREATE TABLE P1 (
+    pos_no INT PRIMARY KEY,
+    post VARCHAR(50)
+);
+
+CREATE TABLE Duty_alloc (
+    pos_no INT,
+    e_no INT,
+    month INT,
+    year INT,
+    shift VARCHAR(20),
+    PRIMARY KEY (pos_no, e_no),
+    FOREIGN KEY (pos_no) REFERENCES P1(pos_no),
+    FOREIGN KEY (e_no) REFERENCES Emp(e_no)
+);
+
+
+
+INSERT INTO Emp VALUES 
+(101, 'Sachin', 'manager', 30000),
+(102, 'Amit', 'clerk', 20000),
+(123, 'Rohit', 'manager', 35000),
+(104, 'Neha', 'manager', 28000);
+
+
+
+INSERT INTO P1 VALUES
+(1, 'manager'),
+(2, 'clerk');
+
+
+
+INSERT INTO Duty_alloc VALUES
+(1, 123, 4, 2003, 'first'),
+(2, 102, 4, 2003, 'second'),
+(1, 104, 4, 2003, 'first'),
+(1, 101, 5, 2003, 'night');
+
+
+
+
+SELECT *
+FROM Duty_alloc
+WHERE e_no = 123
+AND shift = 'First'
+AND month = 'April'
+AND year = 2003;
+
+SELECT *
+FROM Emp
+WHERE pay_rate >= (
+    SELECT pay_rate
+    FROM Emp
+    WHERE e_name = 'Sachin'
+);
+
+CREATE VIEW salary_stats AS
+SELECT post,
+       MIN(pay_rate) AS min_salary,
+       MAX(pay_rate) AS max_salary,
+       AVG(pay_rate) AS avg_salary
+FROM Empl
+GROUP BY post;
+
+SELECT d.shift, COUNT(DISTINCT d.e_no) AS total_employees
+FROM Duty_alloc d
+JOIN Emp e ON d.e_no = e.e_no
+WHERE e.post = 'manager'
+GROUP BY d.shift;

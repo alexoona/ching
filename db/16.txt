@@ -1,0 +1,70 @@
+
+CREATE TABLE Employee (
+    Eid INT PRIMARY KEY,
+    EName VARCHAR(50),
+    Address VARCHAR(50),
+    Salary INT,
+    Commission INT
+);
+
+INSERT INTO Employee VALUES
+(1, 'Amit', 'Pune', 35000, 5000),
+(2, 'Sneha', 'Pune', 25000, NULL),
+(3, 'Savita', 'Nasik', 28000, 2000),
+(4, 'Pooja', 'Mumbai', 19000, NULL),
+(5, 'Sagar', 'Mumbai', 25000, 3000);
+
+
+CREATE TABLE Project (
+    PrNo INT PRIMARY KEY,
+    Addr VARCHAR(50)
+);
+
+-- INSERT INTO PROJECT
+INSERT INTO Project VALUES
+(10, 'Mumbai'),
+(20, 'Pune'),
+(30, 'Jalgaon');
+
+SELECT DISTINCT Address FROM Employee;
+
+SELECT MAX(Salary), MIN(Salary) FROM Employee;
+
+SELECT * FROM Employee ORDER BY Salary ASC;
+
+SELECT EName FROM Employee
+WHERE Address IN ('Nashik', 'Pune');
+
+SELECT EName FROM Employee
+WHERE Commission IS NULL;
+
+UPDATE Employee
+SET Address = 'Nashik'
+WHERE EName = 'Amit';
+
+SELECT * FROM Employee
+WHERE EName LIKE 'A%';
+
+SELECT COUNT(*) FROM Employee
+WHERE Address = 'Mumbai';
+
+SELECT Address, COUNT(*) 
+FROM Employee
+GROUP BY Address;
+
+SELECT Address FROM Employee
+UNION
+SELECT Addr FROM Project;
+
+SELECT Address, MIN(Salary)
+FROM Employee
+GROUP BY Address;
+
+SELECT Address, MAX(Salary)
+FROM Employee
+GROUP BY Address
+HAVING MAX(Salary) > 26000;
+
+DELETE FROM Employee
+WHERE Salary > 30000;
+

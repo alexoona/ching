@@ -1,0 +1,78 @@
+CREATE TABLE student (
+    S_ID INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_name VARCHAR(50),
+    tot_cred INT
+);
+
+INSERT INTO student VALUES
+(1, 'Amit', 'Computer', 120),
+(2, 'Amol', 'IT', 110),
+(3, 'Ramesh', 'Computer', 100),
+(4, 'Samar', 'Mechanical', 90),
+(5, 'Kamlesh', 'Computer', 95);
+
+CREATE TABLE instructor (
+    T_ID INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_name VARCHAR(50),
+    salary INT
+);
+
+INSERT INTO instructor VALUES
+(101, 'Amol', 'Computer', 50000),
+(102, 'Amit', 'IT', 45000),
+(103, 'Suresh', 'Computer', 48000),
+(104, 'Rajesh', 'Mechanical', 40000),
+(105, 'Kiran', 'Computer', 55000);
+
+CREATE TABLE course (
+    course_id INT PRIMARY KEY,
+    title VARCHAR(50),
+    dept_name VARCHAR(50),
+    credits INT
+);
+
+INSERT INTO course VALUES
+(201, 'DBMS', 'Computer', 4),
+(202, 'OS', 'Computer', 3),
+(203, 'CN', 'IT', 3),
+(204, 'Thermodynamics', 'Mechanical', 4),
+(205, 'Data Structures', 'Computer', 4);
+
+CREATE TABLE teaches (
+    T_ID INT,
+    course_id INT,
+    sec_id INT,
+    semester INT,
+    year INT,
+
+    PRIMARY KEY (T_ID, course_id),
+
+    FOREIGN KEY (T_ID) REFERENCES instructor(T_ID),
+    FOREIGN KEY (course_id) REFERENCES course(course_id)
+);
+
+INSERT INTO teaches VALUES
+(101, 201, 1, 1, 2024), 
+(103, 202, 1, 1, 2024), 
+(105, 205, 2, 3, 2024), 
+(102, 203, 1, 1, 2024),
+(104, 204, 1, 3, 2024);
+
+
+SELECT i.name, t.semester, t.year, t.course_id
+FROM instructor i
+JOIN teaches t ON i.T_ID = t.T_ID
+ORDER BY t.year, t.semester;
+
+CREATE VIEW student_view AS
+SELECT * FROM student;
+
+ALTER TABLE student
+RENAME COLUMN dept_name TO deptatrment_name;
+
+DELETE FROM student
+WHERE department_name IS NULL;
+
+

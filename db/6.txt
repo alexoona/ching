@@ -1,0 +1,69 @@
+
+CREATE TABLE Stud_Marks (
+    Roll NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    total_marks NUMBER
+);
+
+
+CREATE TABLE Result (
+    Roll NUMBER,
+    Name VARCHAR2(50),
+    Class VARCHAR2(20)
+);
+
+
+INSERT INTO Stud_Marks VALUES (1, 'Amit', 1200);
+INSERT INTO Stud_Marks VALUES (2, 'Sneha', 950); 
+INSERT INTO Stud_Marks VALUES (3, 'Ravi', 870); 
+INSERT INTO Stud_Marks VALUES (4, 'Pooja', 800); 
+
+CREATE OR REPLACE PROCEDURE proc_grade(
+         p_rollno IN NUMBER,
+         p_marks IN NUMBER,
+         p_name IN VARCHAR2 ) 
+IS
+  
+v_class VARCHAR2(50);
+
+
+BEGIN 
+
+
+IF p_marks BETWEEN 990 AND 1500 THEN 
+v_class := 'D';
+
+ELSIF p_marks BETWEEN 900 AND 989 THEN 
+v_class := 'FC';
+
+ELSIF p_marks BETWEEN 825 AND 899 THEN 
+v_class := 'HC';
+
+ELSE
+v_class := 'NO CLASS';
+
+END IF;
+
+INSERT INTO RESULT(Roll,Name,Class) VALUES (p_rollno, p_name, v_class);
+
+DBMS_OUTPUT.PUT_LINE('DONE');
+
+EXCEPTION
+
+WHEN OTHERS THEN
+
+DBMS_OUTPUT.PUT_LINE('OTHER ERROR' || SQLERRM);
+
+END;
+
+/
+
+
+DECLARE
+BEGIN
+FOR r IN (select Roll,name,total_marks from Stud_Marks) LOOP
+proc_grade(r.Roll,r.total_marks,r.name);
+END LOOP;
+COMMIT;
+END;
+/

@@ -1,0 +1,77 @@
+CREATE TABLE Emp (
+    emp_id INT PRIMARY KEY,
+    ename VARCHAR(50),
+    street VARCHAR(50),
+    city VARCHAR(50)
+);
+
+CREATE TABLE Company (
+    c_id INT PRIMARY KEY,
+    cname VARCHAR(50),
+    city VARCHAR(50)
+);
+
+CREATE TABLE works (
+    emp_id INT,
+    c_id INT,
+    ename VARCHAR(50),
+    cname VARCHAR(50),
+    sal INT,
+    PRIMARY KEY (emp_id, c_id),
+    FOREIGN KEY (emp_id) REFERENCES Emp(emp_id),
+    FOREIGN KEY (c_id) REFERENCES Company(c_id)
+);
+
+
+CREATE TABLE Manager (
+    mgr_id INT PRIMARY KEY,
+    mgrname VARCHAR(50)
+);
+
+
+INSERT INTO Emp VALUES
+(1, 'Amit', 'FC Road', 'Pune'),
+(2, 'Sneha', 'MG Road', 'Mumbai'),
+(3, 'Ravi', 'College Road', 'Pune'),
+(4, 'Pooja', 'Station Road', 'Delhi'),
+(5, 'Kiran', 'Main Road', 'Pune');
+
+INSERT INTO Company VALUES
+(101, 'Bosch', 'Pune'),
+(102, 'Mbank', 'Mumbai'),
+(103, 'TCS', 'Pune'),
+(104, 'SBC', 'Delhi');
+
+INSERT INTO works VALUES
+(1, 101, 'Amit', 'Bosch', 25000),
+(2, 102, 'Sneha', 'Mbank', 22000),
+(3, 101, 'Ravi', 'Bosch', 18000),
+(4, 104, 'Pooja', 'SBC', 55000),
+(5, 103, 'Kiran', 'TCS', 30000);
+
+INSERT INTO Manager VALUES
+(201, 'Rajesh'),
+(202, 'Suresh'),
+(203, 'Mahesh');
+
+
+UPDATE Company
+SET city = 'Pune'
+WHERE cname = 'ABC';
+
+UPDATE works
+SET sal = CASE
+    WHEN sal <= 20000 THEN sal + 0.10 * sal
+    ELSE sal + 0.03 * sal
+END
+WHERE cname = 'Mbank';
+
+SELECT e.ename FROM Emp e
+JOIN works w ON e.emp_id = w.emp_id
+JOIN Company c ON w.c_id = c.c_id
+WHERE w.cname = 'Bosch'
+AND c.city = 'Pune';
+
+DELETE FROM works
+WHERE cname = 'SBC'
+AND sal > 50000;

@@ -1,0 +1,63 @@
+
+CREATE TABLE Stud_Marks (
+    Roll NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    total_marks NUMBER
+);
+
+
+CREATE TABLE Result (
+    Roll NUMBER,
+    Name VARCHAR2(50),
+    Class VARCHAR2(30)
+);
+
+
+INSERT INTO Stud_Marks VALUES (1, 'Amit', 1200);   
+INSERT INTO Stud_Marks VALUES (2, 'Sneha', 950);   
+INSERT INTO Stud_Marks VALUES (3, 'Ravi', 870);    
+INSERT INTO Stud_Marks VALUES (4, 'Pooja', 800);   
+INSERT INTO Stud_Marks VALUES (5, 'Kiran', 990);   
+
+CREATE OR REPLACE FUNCTION func_Grade(p_marks NUMBER)
+RETURN VARCHAR2
+IS
+    v_class VARCHAR2(30);
+BEGIN
+    IF p_marks BETWEEN 990 AND 1500 THEN
+        v_class := 'Distinction';
+    ELSIF p_marks BETWEEN 900 AND 989 THEN
+        v_class := 'First Class';
+    ELSIF p_marks BETWEEN 825 AND 899 THEN
+        v_class := 'Higher Second Class';
+    ELSE
+        v_class := 'No Class';
+    END IF;
+
+    RETURN v_class;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE proc_Grade(
+    p_roll NUMBER,
+    p_name VARCHAR2,
+    p_marks NUMBER
+)
+IS
+    v_class VARCHAR2(30);
+BEGIN
+    v_class := func_Grade(p_marks);
+
+    INSERT INTO Result(Roll, Name, Class)
+    VALUES (p_roll, p_name, v_class);
+END;
+/
+
+
+BEGIN
+    FOR r IN (SELECT Roll, Name, total_marks FROM Stud_Marks) LOOP
+        proc_Grade(r.Roll, r.Name, r.total_marks);
+    END LOOP;
+    COMMIT;
+END;
+/
