@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Details</title>
+</head>
+<body>
+
+    <h1 align="center"><u>Personal Details</u></h1>
+
+    <hr>
+
+    <p>
+        <b>Name:</b> Vedant <br><br>
+
+        <strong>College:</strong> ABC College of Engineering <br><br>
+
+        <i>Course:</i> Computer Engineering <br><br>
+
+        <em>Branch:</em> Information Technology <br><br>
+
+        <mark>Email:</mark> vedant@gmail.com <br><br>
+
+        <big>Hobbies:</big> Playing Guitar, Coding, Gaming <br><br>
+
+        <small>City:</small> Pune <br><br>
+
+        <u>Favorite Subject:</u> Web Technology <br><br>
+
+        <del>Old Goal:</del> Doctor <br><br>
+
+        Water Formula: H<sub>2</sub>O <br><br>
+
+        Equation: x<sup>2</sup> + y<sup>2</sup> <br><br>
+
+        <tt>Learning HTML Tags</tt> <br><br>
+
+        <code>
+            printf("Hello World");
+        </code> <br><br>
+
+        <pre>
+Address:
+Pune, Maharashtra
+India
+        </pre>
+
+    </p>
+
+    <hr>
+
+</body>
+</html>
