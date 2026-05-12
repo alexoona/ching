@@ -1,60 +1,73 @@
-<DOCTYPE html>
+
+<!DOCTYPE html>
+<html>
 <head>
-  <title>
-    a
-  </title>
-  
-  <link rel = "stylesheet" href="styles.css">
-  
-  <style>
-    body {
-      font-family : Arial;
-      background-color : white;
-    }
-    
-    h1 {
-      color : blue;
-      text-align: center;
-    }
-    
-    table {
-      border-collapse: collapse;
-      width:60%;
-      margin:auto;
-    }
-    
-    th {
-      background-color:black;
-      color:white;
-    }
-    
-    td {
-    text-align: center;
-    padding: 10px;
-    color: black;
-    }
-    
-  </style>
+    <title>Assignment 04 - CSS Types</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+    </style>
+
 </head>
+
 <body>
-  <h1 style ="color :red">ABC</h1>
-  <h1>XYZ</h1>
-  <h2>PQR</h2>
-  
-  <table border="1">
+
+    <h1 style="color: blue; text-align: center;">Student Information</h1>
+
+    <table>
         <tr>
             <th>Name</th>
-            <th>Course</th>
+            <th>Roll No</th>
+            <th>Class</th>
         </tr>
+
         <tr>
-            <td>Vedant</td>
-            <td>Computer Engineering</td>
+            <td>Rahul</td>
+            <td>101</td>
+            <td>SY</td>
         </tr>
+
+        <tr>
+            <td>Priya</td>
+            <td>102</td>
+            <td>SY</td>
+        </tr>
+
+        <tr>
+            <td>Amit</td>
+            <td>103</td>
+            <td>SY</td>
+        </tr>
+
+        <tr>
+            <td>Sneha</td>
+            <td>104</td>
+            <td>SY</td>
+        </tr>
+
+        <tr>
+            <td>Rohit</td>
+            <td>105</td>
+            <td>SY</td>
+        </tr>
+
     </table>
 
 </body>
 </html>
-
-
-
-
