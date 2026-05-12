@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Calculator</title>
+</head>
+
+<body>
+
+    <h2>Simple Calculator using Switch Case</h2>
+
+    Number 1:
+    <input type="number" id="n1"><br><br>
+
+    Number 2:
+    <input type="number" id="n2"><br><br>
+
+    <button onclick="calculate('+')">Add</button>
+    <button onclick="calculate('-')">Subtract</button>
+    <button onclick="calculate('*')">Multiply</button>
+    <button onclick="calculate('/')">Divide</button>
+
+    <h3 id="result">Result:</h3>
+
+    <script>
+
+        function calculate(op) {
+
+            var a = parseFloat(document.getElementById("n1").value);
+            var b = parseFloat(document.getElementById("n2").value);
+
+            var result;
+
+            switch (op) {
+
+                case '+':
+                    result = a + b;
+                    break;
+
+                case '-':
+                    result = a - b;
+                    break;
+
+                case '*':
+                    result = a * b;
+                    break;
+
+                case '/':
+                    result = a / b;
+                    break;
+
+                default:
+                    result = "Invalid Operation";
+            }
+
+            document.getElementById("result").innerHTML =
+                "Result: " + result;
+        }
+
+    </script>
+
+</body>
+
+</html>

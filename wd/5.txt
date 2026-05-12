@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Responsive Web Page using Bootstrap</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Website</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+
+        <h1 class="text-center text-primary mb-4">
+            Responsive Web Page
+        </h1>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <div class="card p-3 text-center">
+                    <h3>About</h3>
+                    <p>This section contains information about the website.</p>
+                    <button class="btn btn-primary">
+                        Read More
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card p-3 text-center">
+                    <h3>Services</h3>
+                    <p>This section shows different services provided.</p>
+                    <button class="btn btn-success">
+                        View Services
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card p-3 text-center">
+                    <h3>Contact</h3>
+                    <p>This section contains contact information.</p>
+                    <button class="btn btn-danger">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+

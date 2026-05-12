@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Functions</title>
+</head>
+<body>
+
+    <h2>PHP String Manipulation</h2>
+
+    <?php
+        $str = "Hello Vedant";
+
+        echo "Original String: " . $str . "<br><br>";
+
+
+        echo "Length: " . strlen($str) . "<br>";
+
+
+        echo "Reverse: " . strrev($str) . "<br>";
+
+
+        echo "Substring: " . substr($str, 0, 5) . "<br>";
+    ?>
+
+</body>
+</html>

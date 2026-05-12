@@ -1,0 +1,60 @@
+<DOCTYPE html>
+<head>
+  <title>
+    a
+  </title>
+  
+  <link rel = "stylesheet" href="styles.css">
+  
+  <style>
+    body {
+      font-family : Arial;
+      background-color : white;
+    }
+    
+    h1 {
+      color : blue;
+      text-align: center;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width:60%;
+      margin:auto;
+    }
+    
+    th {
+      background-color:black;
+      color:white;
+    }
+    
+    td {
+    text-align: center;
+    padding: 10px;
+    color: black;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1 style ="color :red">ABC</h1>
+  <h1>XYZ</h1>
+  <h2>PQR</h2>
+  
+  <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+        <tr>
+            <td>Vedant</td>
+            <td>Computer Engineering</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+
+
+
+
