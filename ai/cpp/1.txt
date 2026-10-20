@@ -1,0 +1,46 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string location, A, B;
+
+    cout << "Enter initial location (A/B): ";
+    cin >> location;
+
+    cout << "Enter status of Room A (Dirty/Clean): ";
+    cin >> A;
+
+    cout << "Enter status of Room B (Dirty/Clean): ";
+    cin >> B;
+
+    while (A == "Dirty" || B == "Dirty") {
+        if (location == "A") {
+            if (A == "Dirty") {
+                cout << "Room A is Dirty." << endl;
+                cout << "Action: SUCK" << endl;
+                A = "Clean";
+            } else {
+                cout << "Room A is Clean." << endl;
+                cout << "Action: Move Right to Room B" << endl;
+                location = "B";
+            }
+        } else {
+            if (B == "Dirty") {
+                cout << "Room B is Dirty." << endl;
+                cout << "Action: SUCK" << endl;
+                B = "Clean";
+            } else {
+                cout << "Room B is Clean." << endl;
+                cout << "Action: Move Left to Room A" << endl;
+                location = "A";
+            }
+        }
+    }
+
+    cout << "\nBoth rooms are clean." << endl;
+    cout << "Action: No Operation (NoOp)" << endl;
+
+    return 0;
+}
