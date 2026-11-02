@@ -1,60 +1,46 @@
+grid = [
+    ['S', '.', '.'],
+    ['X', '.', '.'],
+    ['.', '.', 'G']
+]
 
-from collections import deque
-
-def bfs(start, goal):
-    queue = deque([(start, [start])])
-    visited = {start}
+def bfs():
+    queue = [[(0, 0)]]          
+    visited = [(0, 0)]
 
     while queue:
-        state, path = queue.popleft()
+        path = queue.pop(0)     
+        row, col = path[-1]     
 
-        if state == goal:
+        if grid[row][col] == 'G':
             return path
 
-        stacks = [list(s) for s in state]
 
-        for i in range(len(stacks)):
-            if not stacks[i]:
+        for r, c in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            new_row = row + r
+            new_col = col + c
+
+
+            if new_row < 0 or new_row > 2 or new_col < 0 or new_col > 2:
                 continue
 
-            block = stacks[i][-1]
 
-            for j in range(len(stacks) + 1):
-                if i == j:
-                    continue
+            if grid[new_row][new_col] == 'X':
+                continue
+            if (new_row, new_col) in visited:
+                continue
 
-                new_stacks = [s[:] for s in stacks]
-                new_stacks[i].pop()
-
-                if j == len(stacks):
-                    new_stacks.append([block])
-                else:
-                    new_stacks[j].append(block)
-
-                new_state = tuple(
-                    tuple(s) for s in new_stacks if s
-                )
-
-                if new_state not in visited:
-                    visited.add(new_state)
-                    queue.append((new_state, path + [new_state]))
+            visited.append((new_row, new_col))
+            queue.append(path + [(new_row, new_col)]) 
 
     return None
 
-def print_state(state):
-    for i, stack in enumerate(state):
-        print("Stack", i + 1, ":", list(stack))
-    print()
+path = bfs()
 
-start = (('C', 'B', 'A'),)
-goal = (('A', 'B', 'C'),)
-
-solution = bfs(start, goal)
-
-if solution:
-    print("Solution Found!")
-    for step, state in enumerate(solution):
-        print("Step", step)
-        print_state(state)
+if path:
+    print("Path Found:")
+    for position in path:
+        print(position)
+    print("Minimum Steps:", len(path) - 1)
 else:
-    print("No Solution Found")
+    print("No Path Found")
