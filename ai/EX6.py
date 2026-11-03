@@ -55,6 +55,10 @@ def main():
             print(r)
     else:
         print("No solution")
+    for i in range(N):
+         for j in range(N):
+             if board[i][j] == 1:
+                  print("Queen at:", (i, j))
 
 if __name__ == "__main__":
     main()
