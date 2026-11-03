@@ -1,77 +1,65 @@
-goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
-start = (1, 2, 3, 4, 0, 6, 7, 5, 8)
+goal  = [1, 2, 3, 4, 5, 6, 7, 8, 0]
+start = [1, 2, 3, 4, 0, 6, 7, 5, 8]
 
-def heuristic(state):
-    distance = 0
 
+def h(state):
+    count = 0
     for i in range(9):
-        if state[i] != 0:
-            pos = goal.index(state[i])
-            distance += abs(i // 3 - pos // 3)
-            distance += abs(i % 3 - pos % 3)
+        if state[i] != 0 and state[i] != goal[i]:
+            count += 1
+    return count
 
-    return distance
 
-def neighbours(state):
-    result = []
-    blank = state.index(0)
-    row, col = divmod(blank, 3)
+def get_children(state):
+    b = state.index(0)           
+    spots = []
 
-    for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-        r = row + dr
-        c = col + dc
+    if b > 2:       spots.append(b - 3)  
+    if b < 6:       spots.append(b + 3)   
+    if b % 3 != 0:  spots.append(b - 1)   
+    if b % 3 != 2:  spots.append(b + 1)   
 
-        if 0 <= r < 3 and 0 <= c < 3:
-            pos = r * 3 + c
-            new_state = list(state)
-            new_state[blank], new_state[pos] = new_state[pos], new_state[blank]
-            result.append(tuple(new_state))
+    children = []
+    for s in spots:
+        new = state[:]                     
+        new[b] = new[s]                    
+        new[s] = 0
+        children.append(new)
+    return children
 
-    return result
+def a_star():
+    open_list = [[h(start), 0, start, [start]]]  
+    visited = []
 
-def a_star(start):
-    queue = [(heuristic(start), 0, start)]
-    parent = {start: None}
-    cost = {start: 0}
-
-    while queue:
+    while len(open_list) > 0:
+    
         best = 0
-
-        for i in range(1, len(queue)):
-            if queue[i][0] < queue[best][0]:
+        for i in range(len(open_list)):
+            if open_list[i][0] < open_list[best][0]:
                 best = i
 
-        f, g, current = queue.pop(best)
+        f, g, board, path = open_list.pop(best)
 
-        if current == goal:
-            path = []
-
-            while current is not None:
-                path.append(current)
-                current = parent[current]
-
-            path.reverse()
-
-            for i, state in enumerate(path):
-                print("Move", i)
-                print(state[:3])
-                print(state[3:6])
-                print(state[6:])
+        if board == goal:
+            print("Solved!")
+            for step in path:
+                print(step[:3])
+                print(step[3:6])
+                print(step[6:])
                 print()
-
             print("Total Moves =", len(path) - 1)
             return
 
-        for child in neighbours(current):
-            new_g = g + 1
+        if board in visited:
+            continue
+        visited.append(board)
 
-            if child not in cost or new_g < cost[child]:
-                cost[child] = new_g
-                parent[child] = current
-
-                f = new_g + heuristic(child)
-                queue.append((f, new_g, child))
+        for child in get_children(board):
+            if child not in visited:
+                new_g = g + 1
+                new_f = new_g + h(child)       
+                open_list.append([new_f, new_g, child, path + [child]])
 
     print("No Solution Found")
 
-a_star(start)
+a_star()
